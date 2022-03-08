@@ -19,20 +19,54 @@ function loadscript(url) {
     head.appendChild(link)
 }
 //监听dom
-function FadeIntersectionObserver(cnodes) {
+function FadeIntersectionObserver(cnodes, styleall) {
     let io = new IntersectionObserver((e) => {
         e.map(item => {
             if (item.isIntersecting) {
-                console.log(item);
                 let nodeMap = {
-                    result: cnodes.getAttribute('free').split('-')[0],
-                    class: cnodes.getAttribute('class'),
+                    style: cnodes.getAttribute('style'),
                 };
-                cnodes.setAttribute('class', `free-lode-up-left ${nodeMap.class}`)
+                //动画时间
+                cnodes.setAttribute('style', `opacity: 0;
+                ${animatorientation(styleall.orientation,1000)}transition:${styleall.time}ms all;  ${nodeMap.class}`)
+                setTimeout(res => {
+                    cnodes.setAttribute('style', `opacity: 0;
+                    ${animatorientation(styleall.orientation,0,true)} transition:${styleall.time}ms all;  ${nodeMap.class}`)
+                }, 100)
             }
         })
     }, {});
     io.observe(cnodes);
+}
+//方位定向
+function animatorientation(direction, px, istwo) {
+    switch (direction) {
+        case 'left':
+            if (istwo) {
+                return `transform: translateX(0px);`
+            }
+            return `transform: translateX(-${px}px);`
+            break;
+        case 'top':
+            if (istwo) {
+                return `transform: translateY(0px);`
+            }
+            return `transform: translateY(-${px}px);`
+            break;
+        case 'bottom':
+            if (istwo) {
+                return `transform: translateY(0px);`
+            }
+            return `transform: translateY(${px}px);`
+            break;
+        case 'right':
+            if (istwo) {
+                return `transform: translateX(0px);`
+            }
+            return `transform: translateX(${px}px);`
+            break;
+        default:
+    }
 }
 //  递归函数
 function openNodes(node) {
@@ -57,15 +91,42 @@ function reviewnode(cnodes) {
         }
     }
 }
+//属性检索
+function Attributesearch(cnodes) {
+    if (cnodes.getAttribute('free')) {
+        const keylength = cnodes.getAttribute('free').split('-');
+        const Setstyle = {
+            types: "",
+            subclass: "",
+            orientation: '',
+            time: 1000
+        };
+        keylength.map((itme, index) => {
+            switch (index) {
+                case 0:
+                    Setstyle.types = itme;
+                    break;
+                case 1:
+                    Setstyle.subclass = itme;
+                    break;
+                case 2:
+                    Setstyle.orientation = itme;
+                    break;
+                case 3:
+                    Setstyle.time = itme;
+                    break;
+                default:
+            }
+        })
+        FadeIntersectionObserver(cnodes, Setstyle);
+    }
+}
 //检索载入
 function resultisbot(cnodes) {
     try {
         if (cnodes) {
             if (cnodes.attributes) {
-                // free 动画
-                if (cnodes.getAttribute('free')) {
-                    FadeIntersectionObserver(cnodes);
-                }
+                Attributesearch(cnodes);
             }
         }
     }
@@ -75,7 +136,6 @@ function resultisbot(cnodes) {
 }
 //初始化
 function resultinit() {
-    loadStyle('./style/Fadeout.css');
     openNodes(document.body)
 }
 

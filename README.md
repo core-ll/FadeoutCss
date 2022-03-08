@@ -2,10 +2,15 @@
 
 ```html
  <!-- 给你想要使用出场动画的元素加上free属性 -->
- <div free='free-lode-up-left' ></div>
+ <div free='free-lode-left' ></div>
 ```
 ## 配置参数
+### free属性
+##### free值采用-隔开 分割式多参数配置 需要按照配置顺序进行配置
+|  参数顺序   |  值   | 介绍| 是否必传|
+|   ----   |  ---- | ----  |----  |
+|  1   | free  | 使用free相关内容| 是|
+|  2   | lode  | 可视区出场动画| 是|
+|  3   | left,top,bottom,right  | 出场动画方向| 是|
+|  4   | 动画时间  | 默认1000ms| 否|
 
-|  属性   | 值  | 介绍|
-|  ----  | ----  |----  |
-| free  | free-lode-up-left |从左边出现|
