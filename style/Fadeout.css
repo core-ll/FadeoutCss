@@ -1,0 +1,17 @@
+body{
+    width:100vw;
+    overflow-x: hidden;
+}
+
+.free-lode-up-left{
+    animation:free-lode-up 1s forwards;
+}
+@keyframes free-lode-up {
+    0%{
+         opacity: 0;
+         transform: translateX(-1000px);
+    }100%{
+         opacity: 1;
+         transform: translateX(0px);
+    }
+} 
