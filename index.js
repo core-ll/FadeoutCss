@@ -28,10 +28,10 @@ function FadeIntersectionObserver(cnodes, styleall) {
                 };
                 //动画时间
                 cnodes.setAttribute('style', `opacity: 0;
-                ${animatorientation(styleall.orientation,1000)}transition:${styleall.time}ms all;  ${nodeMap.class}`)
+                ${animatorientation(styleall.orientation,1000)} ${nodeMap.style}`)
                 setTimeout(res => {
-                    cnodes.setAttribute('style', `opacity: 0;
-                    ${animatorientation(styleall.orientation,0,true)} transition:${styleall.time}ms all;  ${nodeMap.class}`)
+                    cnodes.setAttribute('style', `opacity: 1;
+                    ${animatorientation(styleall.orientation,0,true)} transition:${styleall.time}ms all;${nodeMap.style} `)
                 }, 100)
             }
         })
@@ -45,25 +45,25 @@ function animatorientation(direction, px, istwo) {
             if (istwo) {
                 return `transform: translateX(0px);`
             }
-            return `transform: translateX(-${px}px);`
+            return `transform: translateX(-10vw);`
             break;
         case 'top':
             if (istwo) {
                 return `transform: translateY(0px);`
             }
-            return `transform: translateY(-${px}px);`
+            return `transform: translateY(-10vw);`
             break;
         case 'bottom':
             if (istwo) {
                 return `transform: translateY(0px);`
             }
-            return `transform: translateY(${px}px);`
+            return `transform: translateY(10vw);`
             break;
         case 'right':
             if (istwo) {
                 return `transform: translateX(0px);`
             }
-            return `transform: translateX(${px}px);`
+            return `transform: translateX(10vw);`
             break;
         default:
     }
