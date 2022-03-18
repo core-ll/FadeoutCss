@@ -51,13 +51,13 @@ function animatorientation(direction, px, istwo) {
             if (istwo) {
                 return `transform: translateY(0px);`
             }
-            return `transform: translateY(-10vw);`
+            return `transform: translateY(-10vh);`
             break;
         case 'bottom':
             if (istwo) {
                 return `transform: translateY(0px);`
             }
-            return `transform: translateY(10vw);`
+            return `transform: translateY(10vh);`
             break;
         case 'right':
             if (istwo) {
